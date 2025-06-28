@@ -1,0 +1,55 @@
+class Solution {
+public:
+    string reorganizeString(string s) {
+
+        //hash count krege
+        int hash[26]={0};
+
+        for(int i=0;i<s.size();i++){
+            int in=s[i]-'a';
+            hash[in]++;
+        }
+
+        //most frequest character nikal leneg
+
+        int max_freq=INT_MIN;
+        char max_freq_char;
+
+        for(int i=0;i<26;i++){
+            if(hash[i]>max_freq){
+                max_freq=hash[i];
+                max_freq_char=i+'a';
+            }
+        }
+
+        //place krege
+        int index=0;
+        while(max_freq>0 && index<s.size()){
+            s[index]=max_freq_char;
+            max_freq--;
+            index+=2;
+        }
+
+        if(max_freq!=0){
+            return "";
+        }
+     
+        hash[max_freq_char-'a']=0;
+        //rest other character place krna hai
+        for(int i=0;i<26;i++){
+            while(hash[i]>0){
+                if(index>=s.size()){
+                    index=1;
+                }
+                s[index]=i+'a';
+                hash[i]--;
+                index+=2;
+                
+            }
+        }
+
+        return s;
+
+        
+    }
+};
