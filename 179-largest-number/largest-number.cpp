@@ -1,27 +1,31 @@
 class Solution {
 public:
-    static bool cmp(string& x, string& y){
-        return x+y> y+x;
-    }
+       static bool mycomp(string a,string b){
+        string t1=a+b;
+        string t2=b+a;
+        return t1>t2;
+       }
+    
     static string largestNumber(vector<int>& nums) {
-        int n=nums.size();
-        vector<string> s(n);
-        for(int i=0; i<n; i++){
-            s[i]=to_string(nums[i]);
+        vector<string>snums;
+
+        for(auto n:nums){
+            snums.push_back(to_string(n));
         }
-        sort(s.begin(), s.end(), cmp);
-        string ans=accumulate(s.begin(), s.end(), string());
-        if(ans[0]=='0') return "0"; // edge case for many 0's
+
+        sort(snums.begin(),snums.end(),mycomp);
+
+        if(snums[0]=="0") return "0";
+        string ans="";
+        for(auto str:snums){
+            ans+=str;
+        }
         return ans;
+
+       
     }
 };
 
 
 
 
-auto init = []() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 'c';
-}();
