@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-  int solve(int n,vector<int>&t){
+  /*int solve(int n,vector<int>&t){
     if(n<0)return 0;
 
     if(n==0)return 1;
@@ -13,12 +13,23 @@ public:
 
     return t[n]=onestep+twostep;
 
-  }
+  }*/
     int climbStairs(int n) {
 
-        vector<int>t(46,-1);
+        if(n==1 || n==2) return n;
 
-        return solve(n,t);
+        vector<int>t(n+1);
+        t[0]=0;
+        t[1]=1;
+        t[2]=2;
+
+        for(int i=3;i<=n;i++){
+            t[i]=t[i-1]+t[i-2];
+        }
+
+        return t[n];
+
+        
         
     }
 };
